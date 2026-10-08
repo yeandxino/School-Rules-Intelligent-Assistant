@@ -1,0 +1,5 @@
+streamlit
+pypdf
+numpy
+dashscope
+hello-agents
