@@ -6,16 +6,12 @@ from pypdf import PdfReader
 from hello_agents import HelloAgentsLLM
 
 # ==================== 配置 ====================
-dashscope.api_key = "dashscope.api_key" # 确保环境变量里有
-LLM_API_KEY = "LLM_API_KEY"
-LLM_BASE_URL = "https://api-inference.modelscope.cn/v1"
-LLM_MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
+dashscope.api_key = st.secrets.get("DASHSCOPE_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
 
-# 初始化大模型
 llm = HelloAgentsLLM(
-    model=LLM_MODEL,
-    api_key=LLM_API_KEY,
-    base_url=LLM_BASE_URL
+    model=st.secrets.get("LLM_MODEL") or os.getenv("LLM_MODEL", "deepseek-ai/DeepSeek-V4.1-Flash"),
+    api_key=st.secrets.get("LLM_API_KEY") or os.getenv("LLM_API_KEY"),
+    base_url=st.secrets.get("LLM_BASE_URL") or os.getenv("LLM_BASE_URL", "https://api-inference.modelscope.cn/v1")
 )
 
 
